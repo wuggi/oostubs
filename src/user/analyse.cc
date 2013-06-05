@@ -43,6 +43,7 @@ void analyseException(unsigned short slot, void** esp){
 
 	  kout << hex << *esp++ << endl;
   }
+  //traplist
   switch (slot) {
 	  case 0: kout << "Division-by-zero" << endl; break;
 	  case 1: kout << "Debug exception" << endl; break;
@@ -110,7 +111,16 @@ void analyseProcedureStack(void** esp){
   /* * * * * * * * * * * * * * * * * * *\
   # Start ToDo-Bereich                  #
   \* * * * * * * * * * * * * * * * * * */
-  //TODO Analyse-Ausgaben hier hin
+  int i=0;
+  for(i; i<60;i++)
+  {
+      if(i%4==0 && i!=0)
+      {
+          kout<<endl;
+          kout << "0x" << *(esp+i) <<" ";
+      }
+      kout<<endl;
+  }
   
   /* * * * * * * * * * * * * * * * * * *\
   #  Ende ToDo-Bereich                  #

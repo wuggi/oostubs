@@ -79,8 +79,27 @@ O_Stream& O_Stream::operator << (long value) {
     *this << ((unsigned long) value);
   return *this;
 }
+//to put 0 inside the hex numbers
+O_Stream& O_Stream::operator <<(unsigned long val){
+    if(base==hex)
+    {
+        unsigned int mbase = (int) base;
+        int cnt = 1;
+        while(val>mbase)
+        {
+            mbase=mbase*(int)base;
+            cnt++;
+        }
+        for(int i=8-cnt;i>0;i--)
+        {
+            *this<<'0';
+        }
+    }
+    return putBuf(val);
+}
 
-O_Stream& O_Stream::operator << (unsigned long value) {
+
+O_Stream& O_Stream::putBuf(unsigned long value) {
 
     if (value < base) {         //One char is enough
         if (value < 10) {       //this is where I can use numbers
@@ -91,15 +110,8 @@ O_Stream& O_Stream::operator << (unsigned long value) {
         }
     } else {
 		    
-		 for(int pos=0;pos<=7;pos++)
-			{
-				 if(value<pos*16)
-				 {
-					 put((char)('0'));
-				}
-			}                    //I'll need mutiple chars
-        *this << (value/base);  //recursion
-        *this << (value%base);
+        putBuf(value/base);  //recursion
+        putBuf(value%base);
     }
     
   return *this;

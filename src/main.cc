@@ -81,12 +81,34 @@ extern "C" void kernel(uint32_t magic, const Multiboot_Info* info);
  **/
 void kernel(uint32_t magic, const Multiboot_Info* info){
 
-    #if USE_TASK == 10
-       TaskClass task(magic, info);
-    #else
-      TaskClass task;
-    #endif
+#if USE_TASK == 30
+  TaskClass task1;
+  SndTaskClass task2;
 
-    task.action();
+  kout.clear();
+  kout.setpos(25,1);
+  kout << "OOStuBs - Task 3A und Task 3B" << endl;
+  while(true){
+      kout.flush();
+      globalTaskChoice = 0;
+      kout << endl << "please choose task(alt+1 or alt+2)" << endl;
+      while(globalTaskChoice!=1 && globalTaskChoice!=2){
+          cpu.halt();
+      }
+      if(1 == globalTaskChoice){
+          task1.action();
+      }else{
+          task2.action();
+      }
+  }
+  #else
+  #if USE_TASK == 10
+      TaskClass task(magic, info);
+  #else
+      TaskClass task;
+  #endif
+
+  task.action();
+  #endif
   
 }
