@@ -83,12 +83,16 @@ O_Stream& O_Stream::operator << (long value) {
 O_Stream& O_Stream::operator <<(unsigned long val){
     if(base==hex)
     {
-        unsigned int mbase = (int) base;
+        unsigned int mbase = (unsigned int) base;
         int cnt = 1;
         while(val>mbase)
         {
             mbase=mbase*(int)base;
             cnt++;
+            if(mbase==0)
+            {
+                break;
+            }
         }
         for(int i=8-cnt;i>0;i--)
         {

@@ -119,9 +119,9 @@ void analyseProcedureStack(void** esp){
           kout<<endl;
       }
       kout << hex << *(esp+i) <<" ";
-
   }
   kout<<endl;
+
   
   /* * * * * * * * * * * * * * * * * * *\
   #  Ende ToDo-Bereich                  #
