@@ -117,10 +117,11 @@ void analyseProcedureStack(void** esp){
       if(i%4==0 && i!=0)
       {
           kout<<endl;
-          kout << "0x" << *(esp+i) <<" ";
       }
-      kout<<endl;
+      kout << hex << *(esp+i) <<" ";
+
   }
+  kout<<endl;
   
   /* * * * * * * * * * * * * * * * * * *\
   #  Ende ToDo-Bereich                  #
